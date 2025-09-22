@@ -1,0 +1,233 @@
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Skin Cancer Detection</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.0/css/mdb.min.css" rel="stylesheet">
+
+    <style>
+        /* Background */
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                        url("{% static 'retina.jpg' %}") center/cover no-repeat;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Card styling */
+        .card {
+            width: 800px;
+            max-width: 95%;
+            margin: 5% auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Header badge */
+        .card .badge {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            background-color: #0d6efd;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        /* File input button */
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #0dcaf0;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.3s;
+            text-align: center;
+        }
+
+        .custom-file-btn:hover {
+            background-color: #0bb3d9;
+            transform: translateY(-2px);
+        }
+
+        /* Submit button */
+        #submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #198754;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #submit:hover {
+            background-color: #157347;
+            transform: translateY(-2px);
+        }
+
+        /* Loader styling */
+        .loader {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .spinner-grow {
+            margin: 2px;
+        }
+
+        /* Navbar customization */
+        .navbar {
+            background-color: rgba(13, 110, 253, 0.9) !important;
+        }
+
+        .navbar .navbar-brand,
+        .navbar .nav-link {
+            font-weight: 600;
+            color: #fff !important;
+        }
+
+        .navbar .nav-link i {
+            margin-right: 5px;
+        }
+
+        /* Image preview */
+        #image-preview {
+            margin-top: 20px;
+            max-width: 100%;
+            max-height: 300px;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="mb-4 navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">SKIN CANCER</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+    <!-- User dropdown -->
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle waves-effect waves-light" id="userDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> {{name}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="{% url 'logout' %}">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </li>
+</ul>
+
+        </div>
+    </nav>
+
+    <!-- Detection Card -->
+    <div class="container">
+        <div class="card hoverable">
+            <form action="{% url 'submit' %}" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <span class="badge">
+                        SKIN CANCER DETECTION
+                    </span>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <label class="custom-file-btn">
+                            <span id="file-label">Choose Image</span>
+                            <input type="file" name="image" id="image-input" accept="image/*" required>
+                        </label>
+                        <img id="image-preview" src="#" alt="Image Preview">
+                    </div>
+                    <div class="col-md-6">
+                        <input class="btn" id="submit" type="submit" value="Submit">
+                        <div class="loader">
+                            <div class="spinner-grow text-primary" role="status"></div>
+                            <div class="spinner-grow text-secondary" role="status"></div>
+                            <div class="spinner-grow text-success" role="status"></div>
+                            <div class="spinner-grow text-danger" role="status"></div>
+                            <div class="spinner-grow text-warning" role="status"></div>
+                            <div class="spinner-grow text-info" role="status"></div>
+                            <div class="spinner-grow text-light" role="status"></div>
+                            <div class="spinner-grow text-dark" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.0/js/mdb.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Show selected file name
+            $('#image-input').on('change', function () {
+                var file = this.files[0];
+                if (file) {
+                    $('#file-label').text(file.name);
+
+                    // Display image preview
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#image-preview').attr('src', e.target.result);
+                        $('#image-preview').show();
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    $('#file-label').text('Choose Image');
+                    $('#image-preview').hide();
+                }
+            });
+
+            // Show loader when submitting
+            $('#submit').click(function () {
+                $(this).hide();
+                $('.loader').show();
+            });
+        });
+    </script>
+</body>
+
+</html>

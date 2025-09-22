@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up / Login</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/css/mdb.min.css" rel="stylesheet">
+
+  <style>
+    /* Background */
+    body {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                  url("{% static 'login.jpg' %}") center/cover no-repeat;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Center modal vertically and add shadow */
+    #modalLRForm .modal-dialog {
+      margin-top: 5%;
+      max-width: 500px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+
+    /* Tabs style */
+    .nav-tabs.md-tabs .nav-link {
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .nav-tabs.md-tabs .nav-link.active {
+      background-color: #0d6efd !important;
+      color: #fff !important;
+      border-radius: 5px;
+    }
+
+    /* Form input styling */
+    .md-form input.form-control:focus {
+      border-bottom: 2px solid #0dcaf0 !important;
+      box-shadow: 0 1px 0 0 #0dcaf0 !important;
+    }
+
+    /* Buttons */
+    .btn-info {
+      background-color: #0dcaf0;
+      border: none;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    .btn-info:hover {
+      background-color: #0bb3d9;
+      transform: translateY(-2px);
+    }
+
+    /* Add subtle card-like background */
+    .modal-content {
+      border-radius: 15px;
+      background: rgba(255,255,255,0.95);
+      padding: 30px 20px;
+    }
+
+    /* Labels */
+    label {
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Modal: Login / Register Form-->
+<div id="modalLRForm" aria-labelledby="myModalLabel">
+  <div class="modal-dialog cascading-modal" role="document">
+    <div class="modal-content">
+
+      <!-- Modal cascading tabs -->
+      <div class="modal-c-tabs">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fas fa-user mr-1"></i> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fas fa-user-plus mr-1"></i> Register</a>
+          </li>
+        </ul>
+
+        <!-- Tab panels -->
+        <div class="tab-content">
+          <!--Panel 7: Login-->
+          <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+            <form method="post" action="{% url 'login' %}">
+              <div class="modal-body mb-1">
+                <div class="md-form form-sm mb-4">
+                  <i class="fas fa-user prefix"></i>
+                  <input type="email" id="modalLRInput10" name="email" class="form-control form-control-sm validate" required>
+                  <label for="modalLRInput10">Email</label>
+                </div>
+
+                <div class="md-form form-sm mb-4">
+                  <i class="fas fa-lock prefix"></i>
+                  <input type="password" id="modalLRInput11" name="password" class="form-control form-control-sm validate" required>
+                  <label for="modalLRInput11">Password</label>
+                </div>
+
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-info btn-block">Log in <i class="fas fa-sign-in-alt"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!--Panel 8: Register-->
+          <div class="tab-pane fade" id="panel8" role="tabpanel">
+            <form method="post" action="{% url 'signup' %}">
+              <div class="modal-body">
+                <div class="md-form form-sm mb-4">
+                  <i class="fas fa-user prefix"></i>
+                  <input type="text" id="modalLRInput12" name="fullname" class="form-control form-control-sm validate" required>
+                  <label for="modalLRInput12">Full Name</label>
+                </div>
+
+                <div class="md-form form-sm mb-4">
+                  <i class="fas fa-envelope prefix"></i>
+                  <input type="email" id="modalLRInput13" name="email" class="form-control form-control-sm validate" required>
+                  <label for="modalLRInput13">Email</label>
+                </div>
+
+                <div class="md-form form-sm mb-4">
+                  <i class="fas fa-lock prefix"></i>
+                  <input type="password" id="modalLRInput14" name="password" class="form-control form-control-sm validate" required>
+                  <label for="modalLRInput14">Password</label>
+                </div>
+
+                <div class="md-form form-sm mb-4">
+                  <i class="fas fa-lock prefix"></i>
+                  <input type="password" id="modalLRInput15" name="cpass" class="form-control form-control-sm validate" required>
+                  <label for="modalLRInput15">Repeat Password</label>
+                </div>
+
+                <div class="text-center form-sm mt-2">
+                  <button type="submit" class="btn btn-info btn-block">Sign Up <i class="fas fa-user-plus"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--/.Tab panels-->
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--/.Modal-->
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/js/mdb.min.js"></script>
+
+</body>
+</html>
