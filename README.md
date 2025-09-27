@@ -1,7 +1,7 @@
 # Skin Cancer Detection Django Project
 
-**Author:** devcherop  
-**Initial Commit:** 5 days ago  
+**Author:** dev-cherop  
+ 
 
 ---
 
