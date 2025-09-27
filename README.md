@@ -21,22 +21,6 @@ The **Skin Cancer Detection Django Project** is a web application that allows us
 
 ---
 
-## Project Structure
-SkinDetectorProject/
-│
-├── coreapp/ # Main Django app containing models, views, and templates
-├── static/img/ # Static images used in the project
-├── naive_bayes.pkl # Pre-trained Naive Bayes model
-├── svm.pkl # Pre-trained SVM model
-├── manage.py # Django management script
-├── .gitignore # Git ignore rules
-└── README.md # Project documentation
-
-yaml
-Copy code
-
----
-
 ## Installation
 
 1. **Clone the repository:**
