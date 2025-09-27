@@ -51,6 +51,7 @@ Access the app:
 Open http://127.0.0.1:8000 in your browser.
 
 Usage
+
 1.Navigate to the upload page.
 
 2.Upload an image of the skin lesion.
