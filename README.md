@@ -25,6 +25,7 @@ The **Skin Cancer Detection Django Project** is a web application that allows us
 
 1. **Clone the repository:**
 git clone https://github.com/dev-cherop/Skin_Detectention_System.git
+
 cd Skin_Detectention_System
 Create a virtual environment and activate it:
 
