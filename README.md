@@ -1,7 +1,7 @@
 # Skin Cancer Detection Django Project
 
-**Author:** dev-cherop  
- 
+**Author:** devcherop  
+
 
 ---
 
@@ -21,20 +21,59 @@ The **Skin Cancer Detection Django Project** is a web application that allows us
 
 ---
 
+## Project Structure
+SkinDetectorProject/
+│
+├── coreapp/ # Main Django app containing models, views, and templates
+├── static/img/ # Static images used in the project
+├── naive_bayes.pkl # Pre-trained Naive Bayes model
+├── svm.pkl # Pre-trained SVM model
+├── manage.py # Django management script
+├── .gitignore # Git ignore rules
+└── README.md # Project documentation
+
+yaml
+Copy code
+
+---
+
 ## Installation
 
 1. **Clone the repository:**
 ```bash
-2. git clone https://github.com/dev-cherop/Skin_Detectention_System.git
+git clone https://github.com/dev-cherop/Skin_Detectention_System.git
 cd Skin_Detectention_System
+Create a virtual environment and activate it:
 
-3. python -m venv venv
+bash
+Copy code
+python -m venv venv
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
+Install dependencies:
 
-4. pip install -r requirements.txt
+bash
+Copy code
+pip install -r requirements.txt
+Run migrations:
 
-5. python manage.py migrate
+bash
+Copy code
+python manage.py migrate
+Start the development server:
 
-6. python manage.py runserver
- 
+bash
+Copy code
+python manage.py runserver
+Access the app:
+Open http://127.0.0.1:8000 in your browser.
+
+Usage
+Navigate to the upload page.
+
+Upload an image of the skin lesion.
+
+The system will return a prediction using the trained models.
+
+Interpret results carefully and consult a healthcare professional for medical advice.
+
